@@ -28,7 +28,9 @@ jobs:
         shell: bash
         env:
           DISPLAY: ':99'
+          PR_NUM: '${{github.event.issue.number}}'
         run: |
+          echo $PR_NUM
           npm ci
           npm run test:jest
       - name: '        Create COV_REPORT'
