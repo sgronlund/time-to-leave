@@ -16,11 +16,13 @@ jobs:
           reaction: rocket
         env:
           GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+          PR_NUM:  ${{github.event.issue.number}}
       - name: Clone git repo
         uses: actions/checkout@v2
         if: steps.check.outputs.triggered == 'true'
       - name: Configure Git Agent
         run: |
+          echo $PR_NUM
           git config --global user.name 'Changelog Bot'
           git config --global user.email 'changelog-bot@users.noreply.github.com'
       - name: Update Changelog
