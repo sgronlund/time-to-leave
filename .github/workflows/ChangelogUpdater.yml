@@ -7,7 +7,7 @@ on:
 
 jobs:
   update-changelog:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: khan/pull-request-comment-trigger@master
         id: check
@@ -26,8 +26,9 @@ jobs:
       - name: Update Changelog
         if: (github.event.comment.user.login == 'thamara' || github.event.comment.user.login == 'tupaschoal' || github.event.comment.user.login == 'araujoarthur0') && steps.check.outputs.triggered == 'true'
         env:
-          COMMENT_BODY: ${{ github.event.comment.body }}
-          USER: ${{ github.event.comment.user.login }}
+          COMMENT_BODY: ${{github.event.comment.body}}
+          USER: ${{github.event.comment.user.login}}
+          PR_NUM:  ${{github.event.issue.number}}
         run: |
           echo "Found it"
           echo "Body: $COMMENT_BODY"
