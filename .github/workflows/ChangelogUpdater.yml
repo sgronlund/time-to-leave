@@ -15,7 +15,7 @@ jobs:
           trigger: '\changelog-update'
           reaction: rocket
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
       - name: Clone git repo
         uses: actions/checkout@v2
         if: steps.check.outputs.triggered == 'true'
