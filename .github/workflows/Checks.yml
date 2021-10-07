@@ -28,7 +28,6 @@ jobs:
         shell: bash
         env:
           DISPLAY: ':99'
-          PR_NUM: '${{github.event.issue.number}}'
         run: |
           npm ci
           npm run test:jest
