@@ -88,17 +88,21 @@ def get_arguments():
 def get_change_and_user(changes_file: str) -> list:
     """Parses changes file retrieving Message and User"""
     message = None
+    number = None
     user = None
     with open(changes_file) as file_handler:
         for line in file_handler.readlines():
             match = re.match("Message: (.*)", line.strip())
             if match:
                 message = match.group(1)
-
+            match = re.match("Pull request number: (.*)", line.strip())
+            if match:
+                number =  " [#" + match.group(1) + "]: "
             match = re.match("User: (.*)", line.strip())
             if match:
                 user = match.group(1)
-
+    message_parts = message.split(": ")
+    message = message_parts[0] + number + message_parts[1] # This might be unsafe but cannot think of when this would fail? Or rather need to know more about the data
     return [message, user]
 
 def main():
