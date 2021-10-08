@@ -101,10 +101,11 @@ def get_change_and_user(changes_file: str) -> list:
             match = re.match("User: (.*)", line.strip())
             if match:
                 user = match.group(1)
-    message_parts = message.split(": ")
-    if number:
-        message_parts[1] = f"{number} {message_parts[1]}"
-    message = " ".join(message_parts)
+    if message:
+        message_parts = message.split(": ")
+        if number:
+            message_parts[1] = f"{number} {message_parts[1]}"
+        message = " ".join(message_parts)
     return [message, user]
 
 def main():
