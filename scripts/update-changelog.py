@@ -97,12 +97,14 @@ def get_change_and_user(changes_file: str) -> list:
                 message = match.group(1)
             match = re.match("Pull request number: (.*)", line.strip())
             if match:
-                number =  " [#" + match.group(1) + "]: "
+                number =  f"[#{match.group(1)}]:"
             match = re.match("User: (.*)", line.strip())
             if match:
                 user = match.group(1)
     message_parts = message.split(": ")
-    message = message_parts[0] + number + message_parts[1] # This might be unsafe but cannot think of when this would fail? Or rather need to know more about the data
+    if number:
+        message_parts[1] = f"{number} {message_parts[1]}"
+    message = " ".join(message_parts)
     return [message, user]
 
 def main():
