@@ -97,7 +97,7 @@ def get_change_and_user(changes_file: str) -> list:
                 message = match.group(1)
             match = re.match("Pull request number: (.*)", line.strip())
             if match:
-                number =  f"[#{match.group(1)}]:"
+                number =  f"[#{match.group(1)}]"
             match = re.match("User: (.*)", line.strip())
             if match:
                 user = match.group(1)
